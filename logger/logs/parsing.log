@@ -1,0 +1,1 @@
+2023-10-08 12:26:01 - parsing_log.get_data.helpers - ERROR - 'NoneType' object has no attribute 'get_text' from selector 'span[class*='rider-hero__details-team']'

@@ -11,16 +11,17 @@ The simulated data is derived from a sample of real transactions from a month of
        c. Decided on which insights to highlight from the data (rank importance of highlights)
        d. What additional information/context could have been useful in forming the conclusion
 2. Key insights and trends from dataset
-       a. Include visualizations (graphs, pie charts, pivot tables, etc.)
+       a. Identify patterns of interest or trends over time that could have significant business impact or impact on Compliance policy or operational practices
+       b. Include visualizations (graphs, pie charts, pivot tables, etc.)
 4. Executive Summary
         a. Summarize insights and their implications for Compliance Operations and testing and optimization of teams
 
 ## Necessary Steps
 1. Import dataset into Pandas DataFrame using Python
-4. Validate and clean the data using Pandas 
-5. Create MySQL table and insert records into table
-7. Analyze the data via Python, SQL, and Tableu to find insights
-8. Determine if patterns found indicate potential fraud or money laundering
+2. Validate and clean the data using Pandas 
+3. Create MySQL table and insert records into table
+4. Analyze the data via Python, SQL, and Tableu to find insights
+5. Determine if patterns found indicate potential fraud or money laundering
     a. Describe how you've come to your conclusion
     b. Support with visualizations (Tableu)
 

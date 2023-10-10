@@ -10,3 +10,6 @@ venv/
 # ignore all .env files
 *.env
 
+# ignore data input & output folder
+data/input/*
+data/output/*
