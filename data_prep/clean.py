@@ -22,15 +22,21 @@ def clean_df(path: Path) -> None:
     # drop duplicate rows
     df = df.drop_duplicates(keep="first")
 
+    # ensure there are no NaN values
+    empty_values = df.isnull().values.any()
+    # raise execption if there are empty values
+    if empty_values:
+        raise ValueError(f"Empty values found in dataframe here -> {path}")
+
     # define new column names
     renamed_columns = {
         "step": "hour",
-        "nameOrig": "sender",
-        "oldbalanceOrg": "sender_old_balance",
-        "newbalanceOrig": "sender_new_balance",
-        "nameDest": "recipient",
-        "oldbalanceDest": "recipient_old_balance",
-        "newbalanceDest": "recipient_new_balance",
+        "nameOrig": "initiator_id",
+        "oldbalanceOrg": "initiator_old_balance",
+        "newbalanceOrig": "initiator_new_balance",
+        "nameDest": "target_id",
+        "oldbalanceDest": "target_old_balance",
+        "newbalanceDest": "target_new_balance",
         "isFraud": "is_fraud",
     }
     # rename columns
@@ -43,16 +49,14 @@ def clean_df(path: Path) -> None:
 
     # drop "isFlaggedFraud" column
     df = df.drop("isFlaggedFraud", axis=1)
-    # create new column "exceeds_transaction_limit" and set to 1 if amount > 200000 else 0
-    df["exceeds_transaction_limit"] = np.where(df["amount"] > 200000, 1, 0).astype(int)
 
     # columns that represent dollar amounts
     money_columns = [
         "amount",
-        "sender_old_balance",
-        "sender_new_balance",
-        "recipient_old_balance",
-        "recipient_new_balance",
+        "initiator_old_balance",
+        "initiator_new_balance",
+        "target_old_balance",
+        "target_new_balance",
     ]
     # loop through money_columns
     for column in money_columns:
@@ -66,17 +70,16 @@ def clean_df(path: Path) -> None:
         "hour",
         "type",
         "amount",
-        "sender",
-        "sender_old_balance",
-        "sender_new_balance",
-        "recipient",
-        "recipient_old_balance",
-        "recipient_new_balance",
+        "initiator_id",
+        "initiator_old_balance",
+        "initiator_new_balance",
+        "target_id",
+        "target_old_balance",
+        "target_new_balance",
         "is_fraud",
-        "exceeds_transaction_limit",
     ]
     # reorder columns
     df = df[column_order]
 
     # write cleaned dataframe to CSV
-    df.to_excel("./data/output/cleaned_paysim_data.csv", index=False, encoding="utf-8")
+    df.to_csv("./data/output/cleaned_paysim_data.csv", index=False, encoding="utf-8")
