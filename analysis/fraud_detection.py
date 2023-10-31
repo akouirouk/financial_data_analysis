@@ -111,22 +111,3 @@ def zero_amount_transactions(df: pd.DataFrame) -> int:
     transactions.to_csv("./data/output/transactions_with_0_amount.csv", index=False)
     # index the shape (rows) of the df
     return transactions.shape[0]
-
-
-def check_balances(df: pd.DataFrame) -> pd.DataFrame:
-    """Return a Pandas DataFrame of transactions where the balance does not properly adjust for amount transacted.
-
-    Args:
-        df (pd.DataFrame): Contains the transaction data
-
-    Returns:
-        pd.DataFrame: The non-mathematically sound transactions
-    """
-
-    # extract the "type" of the transaction
-
-    # run formulas based on the transaction type
-    excpected_balance_diff = df["sender_old_balance"] - df["sender_new_balance"]
-    # df["initiator_transaction_diff"] = [
-    #    1 if expected_balance_diff == df["amount"] else 0
-    # ]

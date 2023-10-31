@@ -1,5 +1,4 @@
 import pandas as pd
-import numpy as np
 
 from pathlib import Path
 
@@ -83,3 +82,46 @@ def clean_df(path: Path) -> None:
 
     # write cleaned dataframe to CSV
     df.to_csv("./data/output/cleaned_paysim_data.csv", index=False, encoding="utf-8")
+
+
+def dataframe_insights(df: pd.DataFrame) -> None:
+    """Get some general information on a Pandas DataFrame
+
+    Args:
+        df (pd.DataFrame): DataFrame to be analyzed
+    """
+
+    # number of dupes
+    print("Number of duplicates: ", df.duplicated().sum())
+    print("\n")
+
+    # number of transactions
+    print(f"Number of Transactions: {df.shape[0]}")
+    # number of features
+    print(f"Number of Features: {df.shape[1]}")
+    # number of transactions where the transaction amount is zero
+    print(f"Number of Transactions of Zero Amount: {len(df[df['amount'] == 0])}")
+    # number of fraudulent transactions
+    print(f"Number of Fraudulent Transactions: {len(df[df['is_fraud'] == 1])}")
+    print("\n")
+
+    # info on the dataframe
+    print("INFO ON DATAFRAME:")
+    print(df.info())
+    print("\n")
+    print(df.describe())
+    print("\n")
+
+    # average amount of non-fraudulent transaction
+    print(
+        f"Average amount of non-fraudulent transaction: {df[df['is_fraud'] == 0]['amount'].mean()}"
+    )
+    # average amount of fraudulent transfer
+    print(
+        f"Average amount of fraudulent transaction: {df[df['is_fraud'] == 1]['amount'].mean()}"
+    )
+    print("\n")
+
+    # number of transactions by type
+    print("NUMBER OF TRANSACTIONS BY TYPE")
+    print(df["type"].value_counts())

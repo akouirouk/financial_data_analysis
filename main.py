@@ -1,10 +1,13 @@
+import pandas as pd
+
+from data_prep.clean import clean_df, dataframe_insights
 from analysis.filter_data import create_pivot_table
 from data_prep.validate import validate_df
-from data_prep.clean import clean_df
 from analysis.filter_data import (
     get_transactions_over_amount,
     transactional_data_per_hour,
 )
+from load_data.to_mysql_table import load_csv_into_mysql
 from analysis.fraud_detection import (
     consecutive_fraudulent_hours,
     zero_amount_transactions,
@@ -12,12 +15,17 @@ from analysis.fraud_detection import (
 )
 
 if __name__ == "__main__":
+    # read original CSV file into data
+    raw_df = pd.read_csv("./data/input/paysim_data.csv")
+    # get some general info on the raw data
+    dataframe_insights(raw_df)
+
     # clean the data
     clean_df("./data/input/paysim_data.csv")
     # validate the cleaned data
     cleaned_df = validate_df("./data/output/cleaned_paysim_data.csv")
-
-    print(cleaned_df.amount.sum())
+    # insert cleaned df into mysql table
+    load_csv_into_mysql()
 
     # write filtered dataframe to CSV file
     get_transactions_over_amount(cleaned_df, "amount", 200000.00)

@@ -1,4 +1,5 @@
 black==23.9.1
+python-dotenv==1.0.0
 frictionless==5.16.0
 matplotlib==3.8.0
 mysql-connector-python==8.1.0
