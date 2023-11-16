@@ -3,6 +3,8 @@ I will be analyzing the dataset [available on Kaggle](https://www.kaggle.com/dat
 
 The simulated data is derived from a sample of real transactions from a month of financial logs from a mobile money service based in an African country. 
 
+**My analytical report can be found in this** [**Google Doc**](https://docs.google.com/document/d/17Q1_8ZXgOJGYxcuBhDnGK-He7Pbchds0hrt6bgvSISI/edit?usp=sharing).
+
 ## Goal
 **Create a PDF document for a group Compliance Mangers containing:**
 1. A write-up of methodology explaining how you:
